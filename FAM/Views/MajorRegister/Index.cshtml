@@ -1,0 +1,67 @@
+﻿@model IEnumerable<BusinessObj.Models.UserMajor>
+
+@{
+    PagerModel pager = ViewBag.Pager;
+}
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+
+<div class="col-4 p-0 justify-content-end mt-1">
+    <form asp-action="Index">
+        <span class="btn-group">
+            <input class="form-control" type="text" name="SearchText" value="@ViewBag.SearchText" placeholder="Search Key" />
+            <input class="p-1 ml-2 btn btn-sm btn-danger" style="border-radius: 10px;" type="submit" value="Search" />
+        </span>
+    </form>
+</div>
+
+<!--topbar-->
+<div class="row">
+    <div class="col-12">
+        <partial name="_topBar" model="@pager"/>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <p>Ma hoc sinh</p>
+            </th>
+            <th>
+                <p>ten hoc sinh</p>
+            </th>
+            <th>
+                <p>chuyen nganh</p>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.AccountName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Major.MajorName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<!--bottombar-->
+<div class="row">
+    <div class="col-12">
+        <partial name="_bottomBar" model="@pager"/>
+    </div>
+</div>

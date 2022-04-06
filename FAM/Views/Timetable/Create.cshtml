@@ -1,0 +1,190 @@
+﻿@using BusinessObj.DTOs;
+@using BusinessObj.Models;
+@model FAM.Models.TimetableModel;
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    TimeTableDTO loadData = ViewData["CHOOSEN"] as TimeTableDTO;
+    IEnumerable<CreateTimetableError>? errors = ViewData["ERRORLIST"] as IEnumerable<CreateTimetableError>;
+}
+
+<h2>Quick Creating Timetable</h2>
+<h2 style="color:red">@TempData["Message"]</h2>
+
+<div class="row holycow">
+    @if(!loadData.ClassList.Any())
+    {
+        <h2 color="red">All classes already have a timetable, or there is no class in the dataset. (Hint: Go edit the timetable for the class that you want to modify or create a new class.)</h2>
+    }
+    @if(!loadData.TeacherList.Any())
+    {
+        <h2 color="red">There is no teacher in the dataset. (Hint: Recruite more teacher.)</h2>
+    }
+    @if(!loadData.RoomList.Any())
+    {
+        <h2 color="red">There is no room available right now to create a timetable. (Hint: Build more room.)</h2>
+    }
+    @if(loadData.ClassList.Any() && loadData.TeacherList.Any() && loadData.RoomList.Any())
+    {
+        <div class="col-md-4">
+        <form asp-action="Create" asp-controller="Timetable" method="POST">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ClassID" class="control-label"></label>
+                <select class="form-control" asp-for="ClassID">
+                    <option value="" selected disabled hidden>Select Class</option>
+                    @if(loadData.ClassList.Any())
+                    {
+                        foreach(Class colat in loadData.ClassList)
+                        {
+                            <option value="@colat.ClassID">@colat.SubjectID - @colat.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TeacherID" class="control-label"></label>
+                <select class="form-control" asp-for="TeacherID">
+                    <option value="" selected disabled hidden>Select Teacher</option>
+                    @if(loadData.TeacherList.Any())
+                    {
+                        foreach(User lmao in loadData.TeacherList)
+                        {
+                            <option value="@lmao.AccountId">@lmao.AccountName - @lmao.Ower</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateStart" class="control-label">Date Start(Only Accept Monday or Tuesday)</label>
+                <input asp-for="DateStart" class="form-control" id="datingchange" />
+                <span asp-validation-for="DateStart" class="text-danger" id="datewarning"></span>
+            </div>
+            <!--
+            <div class="form-group">
+                <label asp-for="FixedDayOfAWeek" class="control-label"></label>
+                <input asp-for="FixedDayOfAWeek" class="form-control" />
+                <span asp-validation-for="FixedDayOfAWeek" class="text-danger"></span>
+            </div>
+            -->
+            <div class="form-group">
+                <label asp-for="RepeatedSlot" class="control-label"></label>
+                <input asp-for="RepeatedSlot" class="form-control" id="repeatedslotinput" disabled />
+                <span asp-validation-for="RepeatedSlot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomID" class="control-label"></label>
+                <select class="form-control" asp-for="RoomID">
+                    <option value="" selected disabled hidden>Select Room</option>
+                    @if(loadData.RoomList.Any())
+                    {
+                        foreach(Room lmao in loadData.RoomList)
+                        {
+                            <option value="@lmao.RoomID">@lmao.RoomName</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input id="finalbutton" disabled type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <a asp-controller="Timetable" asp-action="CustomCreate" >Go to custom creating timetable</a>
+            </div>
+        </form>
+    </div>
+    }
+    @if(errors != null)
+    {
+        <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Class</th>
+            <th scope="col">Teacher</th>
+            <th scope="col">DateBusy</th>
+            <th scope="col">SlotBusy</th>
+            <th scope="col">Room</th>
+            <th scope="col">Message</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+            @{ int counter = 1;}
+            @foreach(CreateTimetableError err in errors)
+            {
+                <tr>
+                    <th scope="row">@counter</th>
+                    <td>@err.ClassName</td>
+                    <td>@err.TeacherName</td>
+                    <td>@err.Datebusy</td>
+                    <td>@err.slotbusy</td>
+                    <td>@err.RoomID</td>
+                    <td>@err.Message</td>
+                    <td>
+                        <a asp-action="EditTimetable" asp-controller="Timetable" asp-route-roomdetailid="@err.RoomDetailID"
+                            target="_blank" rel="noopener noreferrer">
+                            Change Schedule
+                        </a>
+                    </td>
+                </tr>
+                counter++;
+            }
+        </tbody>
+        </table>
+    }
+</div>
+
+<style>
+    h2
+    {
+        margin-left: 200px;
+        margin-top: 65px;
+    }
+    .holycow
+    {
+        margin-left: 200px;
+        margin-top: 50px;
+    }
+</style>
+
+<script>
+    let inputdate = document.getElementById('datingchange');
+    inputdate.onchange = dateChangeHandler;
+    function dateChangeHandler()
+    {
+        var dad = new Date(inputdate.value);
+        let ssgo = dad.getDay();
+        //console.log(typeof ssgo);
+        if(ssgo === 1) //monday
+        {
+            console.log("one");
+            let slotinput = document.getElementById("repeatedslotinput");
+            slotinput.disabled = false;
+            slotinput.setAttribute("min", 1);
+            slotinput.setAttribute("max", 6);
+            document.getElementById("finalbutton").disabled = false;
+            document.getElementById("datewarning").textContent="";
+        }
+        else if(ssgo === 2) //tuesday
+        {
+            console.log("two");
+            let slotinput = document.getElementById("repeatedslotinput");
+            slotinput.disabled = false;
+            slotinput.setAttribute("min", 1);
+            slotinput.setAttribute("max", 10);
+            document.getElementById("finalbutton").disabled = false;
+            document.getElementById("datewarning").textContent="";
+        }
+        else
+        {
+            console.log("not a number");
+            //đổi thông báo text cho người dùng chỉ nhập thứ 2 hoặc thứ 3 và disable cái repeatedslot
+            document.getElementById("repeatedslotinput").disabled = true;
+            document.getElementById("finalbutton").disabled = true;
+            document.getElementById("datewarning").textContent="Only Accept Monday or Tuesday";
+        }
+        //console.log(dad.getDay());
+    }
+</script>

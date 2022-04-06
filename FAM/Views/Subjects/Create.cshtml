@@ -1,0 +1,61 @@
+﻿@model BusinessObj.Models.Subject
+
+
+@{
+    ViewData["Title"] = "Create";  
+}
+
+<h1>Create</h1>
+
+<h4>Subject</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SubjectID" class="control-label"></label>
+                <input asp-for="SubjectID" class="form-control" />
+                <span asp-validation-for="SubjectID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubjectName" class="control-label"></label>
+                <input asp-for="SubjectName" class="form-control" />
+                <span asp-validation-for="SubjectName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SlotRequire" class="control-label"></label>
+                <input asp-for="SlotRequire" class="form-control" />
+                <span asp-validation-for="SlotRequire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MajorCode" class="control-label"></label>
+                <select asp-for="MajorCode" class ="form-control" asp-items="ViewBag.MajorCode">
+                    <option value="SE">Software Engineer</option>
+                    <option value="AI">Artificial Intelligence</option>
+                    <option value="MC">Multimedia Communication</option>
+                    <option value="IB">International Business</option>
+                    <option value="GD">Graphic Design</option>
+                    <option value="EL">English Language</option>
+                    <option value="JL">Japanese Language</option>
+                    <option value="IA">Information Assurance</option>
+                    <option value="HM">Hospitality Management</option>
+                    <option value="DM">Digital Marketing</option>
+                    
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

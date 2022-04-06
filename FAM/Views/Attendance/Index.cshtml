@@ -1,0 +1,86 @@
+﻿@model IEnumerable<BusinessObj.Models.Attendance>
+
+@{
+    ViewData["Title"] = "Index";
+
+    PagerModel pager = ViewBag.Pager;
+}
+
+<h1>Index</h1>
+
+
+<div class="col-4 p-0 justify-content-end mt-1">
+    <form asp-action="Index">
+        <span class="btn-group">
+            <input class="form-control" type="text" name="SearchText" value="@ViewBag.SearchText" placeholder="Search Key" />
+            <input class="p-1 ml-2 btn btn-sm btn-danger" style="border-radius: 10px;" type="submit" value="Search" />
+        </span>
+    </form>
+</div>
+<!--topbar-->
+<div class="row">
+    <div class="col-12">
+        <partial name="_topBar" model="@pager" />
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountId)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.SlotTotal)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.RoomDetailID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountId)
+                </td>
+               
+             <td>
+                    @Html.DisplayFor(modelItem => item.SlotTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomDetailID)
+                </td>
+                <td>
+                    |
+                    @if (item.Status == "NO")
+                    {
+                        <a asp-action="ReCheck" asp-route-id="@item.AttendanceID">Yes</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Check" asp-route-id="@item.AttendanceID">No</a>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!--bottombar-->
+<div class="row">
+    <div class="col-12">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>

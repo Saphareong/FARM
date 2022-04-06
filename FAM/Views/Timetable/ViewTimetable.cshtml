@@ -1,0 +1,841 @@
+﻿@using BusinessObj.DTOs;
+@using BusinessObj.Models;
+@model ViewTimetableModel
+@{
+    ViewData["Title"] = "ViewTimetable";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<ViewTimeTableDTO>? loadData = ViewData["TIMETABLE"] as IEnumerable<ViewTimeTableDTO>;
+    //attempt 1
+    //30 vòng foreach cho lần đầu tiên chạy render cái view timetable 30 x n lần so sánh để render ra từng grid của tkb
+    //attempt 2
+    //42 FirstOrDefault. I dunno about the performance as i don't really care about the minor code
+    int month = ViewBag.Month;
+    int day = ViewBag.Day;
+    string realday;
+    string realmonth;
+    if (day < 10) realday = "0" + day.ToString();
+    else realday = day.ToString();
+    if (month < 10) realmonth = "0" + month.ToString();
+    else realmonth = month.ToString();
+}
+
+<h2>View Timetable</h2>
+<h2 style="color:red">@ViewBag.Message</h2>
+
+<div class="row holycow">
+    <form asp-action="ViewTimetable" asp-controller="Timetable" method="POST">
+    <label>Muốn xem ngày nhiu?</label>
+    <input type="date" name="dateinput" class="form-control" value="@ViewBag.Year-@realmonth-@realday"/>
+    <input type="submit" class="form-control" />
+    </form>
+    @if(loadData != null)
+    {
+        <table class="table table-dark">
+            <thead>
+        <tr>
+          <th scope="col">Slot</th>
+          <th scope="col">
+            Monday <br/>
+            @Model.Monday.Day/@Model.Monday.Month/@Model.Monday.Year
+          </th>
+          <th scope="col">
+            Tuesday <br/>
+            @Model.Tuesday.Day/@Model.Tuesday.Month/@Model.Tuesday.Year
+          </th>
+          <th scope="col">
+            Wednesday <br/>
+            @Model.Wednesday.Day/@Model.Wednesday.Month/@Model.Wednesday.Year
+          </th>
+          <th scope="col">
+            Thursday <br/>
+            @Model.Thursday.Day/@Model.Thursday.Month/@Model.Thursday.Year
+          </th>
+          <th scope="col">
+            Friday <br/>
+            @Model.Friday.Day/@Model.Friday.Month/@Model.Friday.Year
+          </th>
+          <th scope="col">
+            Saturday <br/>
+            @Model.Saturday.Day/@Model.Saturday.Month/@Model.Saturday.Year
+          </th>
+          <th scope="col">
+            Sunday <br/>
+            @Model.Sunday.Day/@Model.Sunday.Month/@Model.Sunday.Year
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+            <td>
+                @{
+                    ViewTimeTableDTO? tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 1 && a.DayName == 1);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 1 && a.DayName == 2);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 1 && a.DayName == 3);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 1 && a.DayName == 4);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 1 && a.DayName == 5);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 1 && a.DayName == 6);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+            </td>
+            <td>
+                @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 1 && a.DayName == 0);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 2 && a.DayName == 1);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 2 && a.DayName == 2);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 2 && a.DayName == 3);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 2 && a.DayName == 4);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 2 && a.DayName == 5);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 2 && a.DayName == 6);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 2 && a.DayName == 0);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 3 && a.DayName == 1);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 3 && a.DayName == 2);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 3 && a.DayName == 3);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 3 && a.DayName == 4);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 3 && a.DayName == 5);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 3 && a.DayName == 6);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 3 && a.DayName == 0);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">4</th>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 4 && a.DayName == 1);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 4 && a.DayName == 2);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 4 && a.DayName == 3);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 4 && a.DayName == 4);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 4 && a.DayName == 5);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 4 && a.DayName == 6);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 4 && a.DayName == 0);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">5</th>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 5 && a.DayName == 1);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 5 && a.DayName == 2);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 5 && a.DayName == 3);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 5 && a.DayName == 4);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 5 && a.DayName == 5);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 5 && a.DayName == 6);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 5 && a.DayName == 0);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">6</th>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 6 && a.DayName == 1);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 6 && a.DayName == 2);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 6 && a.DayName == 3);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 6 && a.DayName == 4);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 6 && a.DayName == 5);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 6 && a.DayName == 6);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+          <td>
+            @{
+                    tt = loadData.FirstOrDefault(a => a.slotCurrentDay == 6 && a.DayName == 0);
+                    if(tt != null)
+                    {
+                        <a asp-controller="Attendance" 
+                        asp-action="ViewClassInfo" asp-route-roomdetailid="@tt.RoomDetailId">
+                        @tt.ClassName</a> <br/>
+                        @tt.SubjectName <br/>
+                        @tt.RoomName <br/>
+                        @tt.status <br/>
+                    }
+                }
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    }
+    @if(loadData == null)
+    {
+        <iframe width="940" height="554" src="https://www.youtube.com/embed/66QUl-3RnZw?autoplay=31s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    }
+</div> 
+    
+
+
+<style>
+    h2
+    {
+        margin-left: 200px;
+        margin-top: 65px;
+    }
+    .holycow
+    {
+        margin-left: 200px;
+        margin-top: 50px;
+    }
+</style>
+
+
+<!-- tại tôi lười
+<style>
+    .amnoob
+{
+    flex-direction: column;
+}
+
+.timetable {
+    display: grid;
+    grid-template-areas: ". week" "time content";
+    grid-template-columns: 120px;
+    grid-template-rows: 60px;
+    width: 80vw;
+    height: 80vh;
+}
+
+    .timetable .accent-pink-gradient {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #ee8ebc, #eea08e);
+        transition: 0.2s ease box-shadow, 0.2s ease transform;
+    }
+
+        .timetable .accent-pink-gradient:hover {
+            box-shadow: 0 20px 30px 0 rgba(238, 142, 188, 0.3);
+            transform: scale(1.05);
+        }
+
+    .timetable .accent-orange-gradient {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #eec08e, #dcee8e);
+        transition: 0.2s ease box-shadow, 0.2s ease transform;
+    }
+
+        .timetable .accent-orange-gradient:hover {
+            box-shadow: 0 20px 30px 0 rgba(238, 192, 142, 0.3);
+            transform: scale(1.05);
+        }
+
+    .timetable .accent-green-gradient {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #bcee8e, #8eeea0);
+        transition: 0.2s ease box-shadow, 0.2s ease transform;
+    }
+
+        .timetable .accent-green-gradient:hover {
+            box-shadow: 0 20px 30px 0 rgba(188, 238, 142, 0.3);
+            transform: scale(1.05);
+        }
+
+    .timetable .accent-cyan-gradient {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #8eeec0, #8edcee);
+        transition: 0.2s ease box-shadow, 0.2s ease transform;
+    }
+
+        .timetable .accent-cyan-gradient:hover {
+            box-shadow: 0 20px 30px 0 rgba(142, 238, 192, 0.3);
+            transform: scale(1.05);
+        }
+
+    .timetable .accent-blue-gradient {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #8ebcee, #a08eee);
+        transition: 0.2s ease box-shadow, 0.2s ease transform;
+    }
+
+        .timetable .accent-blue-gradient:hover {
+            box-shadow: 0 20px 30px 0 rgba(142, 188, 238, 0.3);
+            transform: scale(1.05);
+        }
+
+    .timetable .accent-purple-gradient {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #c08eee, #ee8edc);
+        transition: 0.2s ease box-shadow, 0.2s ease transform;
+    }
+
+        .timetable .accent-purple-gradient:hover {
+            box-shadow: 0 20px 30px 0 rgba(192, 142, 238, 0.3);
+            transform: scale(1.05);
+        }
+
+    .timetable .weekend {
+        background: #fbfbfc;
+        color: #87a1ad;
+    }
+
+    .timetable .week-names {
+        grid-area: week;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        text-transform: uppercase;
+        font-size: 12px;
+    }
+
+        .timetable .week-names > div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 1px 0 0 #ECEFF1;
+        }
+
+    .timetable .time-interval {
+        grid-area: time;
+        display: grid;
+        grid-template-rows: repeat(6, 1fr);
+        font-size: 14px;
+    }
+
+        .timetable .time-interval > div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            box-shadow: inset 0 1px 0 0 #ECEFF1;
+        }
+
+    .timetable .content {
+        grid-area: content;
+        display: grid;
+        grid-template-rows: repeat(6, 1fr);
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+        .timetable .content > div {
+            box-shadow: inset 1px 0 0 #ECEFF1, inset 0 1px 0 0 #ECEFF1;
+        }
+</style> -->

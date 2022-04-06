@@ -1,0 +1,90 @@
+﻿@model IEnumerable<BusinessObj.Models.Subject>
+@{
+    ViewData["Title"] = "Subjects List";
+    PagerModel pager = ViewBag.Pager;
+}
+<div class="breadcome-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list single-page-breadcome">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="breadcome-heading">
+                                <form asp-action="Index" role="search" class="sr-input-func">
+                                    <input class="form-control" type="text" name="SearchText" value="@ViewBag.SearchText" placeholder="Search Key..." />
+                                    <a type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                @if (TempData["AlertMessage"] != null)
+                {
+                    <div class="alert alert-success alert-success-style1 alert-success-stylenone">
+                        <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
+                            <span class="icon-sc-cl" aria-hidden="true">×</span>
+                        </button>
+                        <p class="message-alert-none"><strong>Success!</strong> @TempData["AlertMessage"]</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Table-->
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="product-status-wrap drp-lst">
+        <h4>Môn học</h4>
+        <div class="asset-inner">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>
+                            Mã môn
+                        </th>
+                        <th>
+                            Tên Môn
+                        </th>
+                        <th>
+                            Số Slots
+                        </th>
+                        <th>
+                            Mã chuyên ngành
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SubjectID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SubjectName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SlotRequire)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MajorCode)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="fixed-table-pagination">
+                <div class="pull-left pagination-detail">
+                    <partial name="_bottomBar" model="@pager" />
+                </div>
+                <div class="pull-right pagination-detail">
+                    <partial name="_topBar" model="@pager" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

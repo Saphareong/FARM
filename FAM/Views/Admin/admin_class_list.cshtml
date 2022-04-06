@@ -1,0 +1,106 @@
+﻿@model IEnumerable<BusinessObj.Models.Class>
+
+@{
+    ViewData["Title"] = "Admin | Class List";
+
+    PagerModel pager = ViewBag.Pager;
+}
+
+<div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list single-page-breadcome">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="breadcome-heading">
+                                <form asp-action="Index" role="search" class="sr-input-func">
+                                    <input class="form-control" type="text" name="SearchText" value="@ViewBag.SearchText" placeholder="Search Key..." />
+                                    <a type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <ul class="breadcome-menu">
+                                <li>
+                                    <a asp-controller="Home" asp-action="Index">Home</a> <span class="bread-slash">/</span>
+                                </li>
+                                <li>
+                                    <span class="bread-blod">List Class</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product-status mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-status-wrap drp-lst">
+                        <h4>Class List</h4>
+                        <div class="add-product">
+                            <a asp-action="Create" asp-controller="Classes">Add New Class</a>
+                        </div>
+                        <div class="asset-inner">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Name)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Subject.SubjectName)
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Status)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Subject.SubjectName)
+                                            </td>
+                                            <td>
+                                                <a asp-action="Edit" asp-controller="Classes" asp-route-id="@item.ClassID" class="btn btn-custon-rounded-three btn-primary">Edit</a>
+                                            </td>
+                                            <td>
+                                                <a asp-action="Details" asp-controller="Classes" asp-route-id="@item.ClassID" class="btn btn-custon-rounded-three btn-success">Details</a>
+
+                                            </td>
+                                            <td>
+                                                <a asp-action="Delete" asp-controller="Classes" asp-route-id="@item.ClassID" class="btn btn-custon-rounded-three btn-danger">Close Class</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="fixed-table-pagination">
+                            <div class="pull-left pagination-detail">
+                                <partial name="_bottomBar" model="@pager" />
+                            </div>
+                            <div class="pull-right pagination-detail">
+                                <partial name="_topBar" model="@pager" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

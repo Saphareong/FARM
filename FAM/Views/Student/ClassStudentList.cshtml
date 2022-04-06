@@ -1,0 +1,83 @@
+﻿@using BusinessObj.DTOs;
+@using BusinessObj.Models;
+@{
+    ViewData["Title"] = "TimetableList";
+    IEnumerable<ViewClassTimeTableDTO>? loadData = ViewData["CLASSSTUDENTLIST"] as IEnumerable<ViewClassTimeTableDTO>;
+}
+
+<div class="breadcome-area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                @if (TempData["AlertMessage"] != null)
+                {
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<h2 style="color:red">@ViewBag.Message</h2>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="product-status-wrap drp-lst">
+        <h4>Danh sách học sinh một lớp</h4>
+        <div class="asset-inner">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>
+                            No.
+                        </th>
+                        <th>
+                            MSSV
+                        </th>
+                        <th>
+                            Tên Sinh Viên
+                        </th>
+                    </tr>
+                    @{
+                        int counter = 1;
+                    }
+                    @foreach (ViewClassTimeTableDTO dto in loadData)
+                    {
+                        <tr>
+                            <td scope="row">@counter</td>
+                            <td>@dto.AccountId</td>
+                            <td>@dto.AccountOwner</td>
+                        </tr>
+                        counter++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*
+    @if (loadData != null)
+    {
+    <table class="table holycow">
+    <thead>
+    <tr>
+    <th scope="col">#</th>
+    <th scope="col">Mã số sinh diên</th>
+    <th scope="col">Tên sinh diên</th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+    int counter = 1;
+    }
+    @foreach (ViewClassTimeTableDTO dto in loadData)
+    {
+    <tr>
+    <th scope="row">@counter</th>
+    <td>@dto.AccountId</td>
+    <td>@dto.AccountOwner</td>
+    </tr>
+    counter++;
+    }
+    </tbody>
+    </table>
+    }*@

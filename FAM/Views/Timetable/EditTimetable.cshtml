@@ -1,0 +1,54 @@
+﻿@using BusinessObj.DTOs;
+@using BusinessObj.Models;
+@{
+    ViewData["Title"] = "EditTimetable";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<RoomTimeDTO> loadData = ViewData["SPECIFICTIMETABLE"] as IEnumerable<RoomTimeDTO>;
+}
+
+<h2>TimeTable For This Class</h2>
+<h2 style="color:red">@ViewBag.Message</h2>
+<h2 style="color:red">@TempData["Message"]</h2>
+@if(loadData != null)
+{
+    <table class="table holycow">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Room Name</th>
+          <th scope="col">slot</th>
+          <th scope="col">Date Happening</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+          @foreach(RoomTimeDTO dto in loadData)
+            {
+                <tr>
+                    <th scope="row">@dto.coursenumba</th>
+                    <td>@dto.RoomName</td>
+                    <td>@dto.slotCurrent</td>
+                    <td>@dto.dateTime</td>
+                    <td>@dto.Status</td>
+                    <td><a asp-controller="Timetable" asp-action="EditTimetable" 
+                        asp-route-roomdetailid="@dto.roomdetailID">Edit</a></td>
+                </tr>
+            }
+      </tbody>
+    </table>
+}
+
+
+<style>
+    h2
+    {
+        margin-left: 200px;
+        margin-top: 65px;
+    }
+    .holycow
+    {
+        margin-left: 130px;
+        margin-top: 50px;
+    }
+</style>

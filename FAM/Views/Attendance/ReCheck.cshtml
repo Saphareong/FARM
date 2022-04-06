@@ -1,0 +1,46 @@
+﻿
+@model BusinessObj.Models.Attendance
+
+@{
+    ViewData["Title"] = "ReCheck";
+}
+
+<h1>ReCheck</h1>
+<div>
+    <h4>Attendance</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AccountId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AccountId)
+        </dd>
+       <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SlotTotal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SlotTotal)
+        </dd>
+
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RoomDetailID)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RoomDetailID)
+        </dd>
+        
+        
+    </dl>
+    <form asp-action="ReCheck">
+        <input type="hidden" asp-for="AttendanceID" />
+        <input type="submit" value="ReCheck" class="btn btn-danger" />|
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

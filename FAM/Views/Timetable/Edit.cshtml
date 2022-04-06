@@ -1,0 +1,127 @@
+﻿@using BusinessObj.DTOs;
+@using BusinessObj.Models;
+@model FAM.Models.EditTimeTableModel;
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    EditTimeTableDTO loadData = ViewData["OLD_DATA"] as EditTimeTableDTO;
+    Dictionary<int, string> roomlist = ViewData["ROOM_LIST"] as Dictionary<int, string>;
+    roomlist.Remove(loadData.RoomID);
+    int year = loadData.OldDateBusy.Year;
+    int mom = loadData.OldDateBusy.Month;
+    int dei = loadData.OldDateBusy.Day;
+    string month;
+    string day;
+    if (mom < 10) month = "0" + mom.ToString();
+    else month = mom.ToString();
+    if (dei < 10) day = "0" + dei.ToString();
+    else day = dei.ToString();
+
+}
+
+<h2>Create A TimeTable</h2>
+<h2 style="color:red">@TempData["Message"]</h2>
+<h2 style="color:red">@ViewBag.Message</h2>
+
+<div class="row holycow">
+        <div class="col-md-6">
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    Tên lớp
+                </dt>
+                <dd>
+                    @loadData.ClassName
+                </dd>
+                <dt>
+                    Môn học
+                </dt>
+                <dd>
+                    @loadData.SubjectName
+                </dd>
+                <dt>
+                    Giáo viên đang dạy
+                </dt>
+                <dd>
+                    @loadData.TeacherName
+                </dd>
+                <dt>
+                    Ngày bắt đầu
+                </dt>
+                <dd>
+                    @loadData.DateStarted
+                </dd>
+            </dl>
+        <form asp-action="EditTimetable" asp-controller="Timetable" method="POST">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoomID" class="control-label"></label>
+                <select class="form-control" asp-for="RoomID">
+                    <option value="@loadData.RoomID" selected>@loadData.RoomName</option>
+                    @foreach(var zolo in roomlist)
+                    {
+                        <option value="@zolo.Key">@zolo.Value</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewDateBusy" class="control-label"></label>
+                <input asp-for="NewDateBusy" class="form-control" 
+                value="@year-@month-@day" id="stupiddate" />
+                <span asp-validation-for="NewDateBusy" class="text-danger" id="datewarning"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewSlotCurrent" class="control-label"></label>
+                <input asp-for="NewSlotCurrent" class="form-control" min="1" max="6" value="@loadData.Oldslotcurrent"/>
+                <span asp-validation-for="NewSlotCurrent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input id="finalbutton" type="submit" value="Modify" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    h2
+    {
+        margin-left: 200px;
+        margin-top: 65px;
+    }
+    .holycow
+    {
+        margin-left: 200px;
+        margin-top: 50px;
+    }
+</style>
+
+<script>
+    //let hmmm = document.getElementById("stupiddate").value;
+    let inputdate = document.getElementById('stupiddate');
+    inputdate.onchange = dateChangeHandler;
+    function dateChangeHandler()
+    {
+        let inputted = new Date(inputdate.value);
+        let current = new Date();
+        inputted.setHours(4);
+        inputted.setMinutes(4);
+        inputted.setSeconds(4);
+        inputted.setMilliseconds(4);
+        current.setHours(4);
+        current.setMinutes(4);
+        current.setSeconds(4);
+        current.setMilliseconds(4);
+        let firsttime = inputted.getTime();
+        let secondtime = current.getTime();
+        if(firsttime < secondtime)
+        {
+            document.getElementById("finalbutton").disabled = true;
+            document.getElementById("datewarning").textContent = "Cannot change into the past date";
+        }
+        else
+        {
+            document.getElementById("finalbutton").disabled = false;
+            document.getElementById("datewarning").textContent = "";
+        }
+    }
+</script>

@@ -1,0 +1,117 @@
+﻿@model List<BusinessObj.Models.Score>
+
+@{
+    ViewData["Title"] = "Update Class Scores";
+}
+
+<h1>Teacher Do The Score Update</h1>
+
+<p style="color:white">Random</p>
+
+@{
+    int count = 1;
+}
+
+<div class="container text-center">
+    <h1>Diem Thanh Phan Lop @ViewBag.ClassCode</h1>
+</div>
+
+@using (Html.BeginForm("UpdateClassScores", "Score", FormMethod.Post)) 
+{
+<div class="container">
+    <table class="table text-center mt-4">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    StudentID
+                </th>
+                <th>
+                    StudentName
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Quiz1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Quiz2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Lab1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Lab2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Lab3)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Assignment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].PE)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+    @for (int i = 0; i < Model.Count(); i++) {
+            <tr>
+                <td>
+                    @count
+                    @{
+                        count++;
+                    }
+                    @Html.HiddenFor(modelItem => Model[i].ScoreID)                    
+                    @Html.HiddenFor(modelItem => Model[i].ClassID)
+                </td>
+                <td>
+                    @Model[i].User.AccountId
+                </td>
+                <td>
+                    @Model[i].User.AccountName
+                </td>
+                <td>                    
+                    @Html.TextBoxFor(modelItem => Model[i].Quiz1, new {@class = "form-control", @type = "number", @min = "0", @max = "10", @step = "0.1"})                    
+                </td>
+                <td>
+                    @Html.TextBoxFor(modelItem => Model[i].Quiz2, new {@class = "form-control", @type = "number", @min = "0", @max = "10", @step = "0.1"})
+                </td>
+                <td>
+                    @Html.TextBoxFor(modelItem => Model[i].Lab1, new {@class = "form-control", @type = "number", @min = "0", @max = "10", @step = "0.1"})
+                </td>
+                <td>
+                    @Html.TextBoxFor(modelItem => Model[i].Lab2, new {@class = "form-control", @type = "number", @min = "0", @max = "10", @step = "0.1"})
+                </td>
+                <td>
+                    @Html.TextBoxFor(modelItem => Model[i].Lab3, new {@class = "form-control", @type = "number", @min = "0", @max = "10", @step = "0.1"})
+                </td>
+                <td>
+                    @Html.TextBoxFor(modelItem => Model[i].Assignment, new {@class = "form-control", @type = "number", @min = "0", @max = "10", @step = "0.1"})
+                </td>
+                <td>
+                    @Html.TextBoxFor(modelItem => Model[i].PE, new {@class = "form-control", @type = "number", @min = "0", @max = "10", @step = "0.1"})
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-10">            
+        </div>
+        <div class="col-2">
+            <button class="btn btn-success" type="submit">Update</button>
+            <button class="btn btn-secondary">
+                @Html.ActionLink("Return", "Index", "Score", new {}, new {@style = "text-decoration:none; color:white;"})
+            </button>
+        </div>
+    </div>
+</div>
+}
+
+@section scripts{
+   <partial name="_ValidationScriptsPartial" />
+}

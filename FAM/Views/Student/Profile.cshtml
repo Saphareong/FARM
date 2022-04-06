@@ -1,0 +1,49 @@
+﻿@model BusinessObj.Models.User
+
+@{
+    ViewData["Title"] = "Student Profile";
+}
+<div class="single-pro-review-area mt-t-30 mg-b-15" style="margin-top: 25px;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="profile-info-inner">
+                    <div class="profile-img">
+                        <img src="~/img/profile/1.jpg" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                <div class="product-payment-inner-st res-mg-t-30 analysis-progrebar-ctn">
+                    <ul id="myTabedu1" class="tab-review-design">
+                        <li class="active"><a href="#INFORMATION">Profile Details</a></li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content custom-product-edit st-prf-pro">
+                        <div class="product-tab-list tab-pane fade active in" id="INFORMATION">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="review-content-section">
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div><b>@Html.DisplayNameFor(model => model.AccountName)</b></div>
+                                                <div><b>@Html.DisplayNameFor(model => model.Ower)</b></div>
+                                                <div><b>@Html.DisplayNameFor(model => model.Email)</b></div>
+                                                <div><b>@Html.DisplayNameFor(model => model.Phone)</b></div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div>@Html.DisplayFor(model => model.AccountName)</div>
+                                                <div>@Html.DisplayFor(model => model.Ower)</div>
+                                                <div>@Html.DisplayFor(model => model.Email)</div>
+                                                <div>@Html.DisplayFor(model => model.Phone)</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

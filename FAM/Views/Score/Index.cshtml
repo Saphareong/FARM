@@ -1,0 +1,76 @@
+﻿@model IEnumerable<BusinessObj.Models.Class>
+
+@{
+    ViewData["Title"] = "Index";
+
+    PagerModel pager = ViewBag.Pager;
+}
+
+<h1>Index</h1>
+
+<p style="color:white">Random</p>
+
+<div class="col-4 p-0 justify-content-end mt-1">
+    <form asp-action="Index">
+        <span class="btn-group">
+            <input class="form-control" type="text" name="SearchText" value="@ViewBag.SearchText" placeholder="Search Key" />
+            <input class="p-1 ml-2 btn btn-sm btn-danger" style="border-radius: 10px;" type="submit" value="Search" />
+        </span>
+    </form>
+</div>
+
+<!--topbar-->
+
+@*
+<div class="row">
+    <div class="col-12">
+        <partial name="_topBar" model="@pager"/>
+    </div>
+</div>
+*@
+
+<table class="table text-center mt-4">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectID)
+            </th>
+            <th>
+                Update Class Score
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ClassID">Edit (Admin)</a> |
+                @*<a asp-action="UpdateClassScores" asp-route-id="@item.ClassID">Update (Teacher)</a>*@
+                @Html.ActionLink("Update (Teacher)", "UpdateClassScores", "Score", new {@item.ClassID} )
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<!--bottombar-->
+<div class="row">
+    <div class="col-12">
+        <partial name="_bottomBar" model="@pager"/>
+    </div>
+</div>

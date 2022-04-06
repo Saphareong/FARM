@@ -1,0 +1,104 @@
+﻿@model IEnumerable<BusinessObj.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+
+    PagerModel pager = ViewBag.Pager;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="col-4 p-0 justify-content-end mt-1">
+    <form asp-action="Index">
+        <span class="btn-group">
+            <input class="form-control" type="text" name="SearchText" value="@ViewBag.SearchText" placeholder="Search Key" />
+            <input class="p-1 ml-2 btn btn-sm btn-danger" style="border-radius: 10px;" type="submit" value="Search" />
+        </span>
+    </form>
+</div>
+<!--topbar-->
+<div class="row">
+    <div class="col-12">
+        <partial name="_topBar" model="@pager" />
+    </div>
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ower)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ower)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role.RoleName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.AccountId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.AccountId">Details</a> |
+                    @if (item.Status == "ON")
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.AccountId">UnActive</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Active" asp-route-id="@item.AccountId">Active</a>
+                    } |
+                    <a asp-action="Change" asp-route-id="@item.AccountId">Change</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!--bottombar-->
+<div class="row">
+    <div class="col-12">
+        <partial name="_bottomBar" model="@pager" />
+    </div>
+</div>

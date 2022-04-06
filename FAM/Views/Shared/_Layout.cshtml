@@ -1,0 +1,296 @@
+﻿@using BusinessObj.Models
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FAM</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- favicon
+        ============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <!-- Google Fonts
+        ============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <!-- FontAwesome JS/CSS
+        ============================================ -->
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+    <!-- owl.carousel CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/css/owl.theme.css">
+    <link rel="stylesheet" href="~/css/owl.transitions.css">
+    <!-- animate CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css/animate.css">
+    <!-- normalize CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css/normalize.css">
+    <!-- main CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css/main.css">
+    <!-- mCustomScrollbar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- metisMenu CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="~/css/metisMenu/metisMenu-vertical.css">
+    <!-- calendar CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css/fullcalendar/main.css">
+    <link rel="stylesheet" href="~/css/fullcalendar/main.min.css">
+    <!-- style CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/style.css">
+    <!-- responsive CSS
+        ============================================ -->
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <!-- Skdslider
+        ============================================ -->
+    <link rel="stylesheet" href="~/css/skdslider.css">
+    <!-- modernizr JS
+        ============================================ -->
+    <script src="~/js/vendor/modernizr-2.8.3.min.js"></script>
+    
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+
+<body>
+    <!-- Start Left menu area -->
+    <div class="left-sidebar-pro">
+        <nav id="sidebar" class="">
+            <div class="sidebar-header">
+                <a asp-area="" asp-controller="Home" asp-action="Index"><img class="main-logo" src="~/img/logo/logo.png" alt="" /></a>
+                <strong><a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/logo/logosn.png" alt="" /></a></strong>
+            </div>
+            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <nav class="sidebar-nav left-sidebar-menu-pro">
+                    <ul class="metismenu" id="menu1">
+                        <li>
+                            <a class="#" href="#">
+                                <span class="fas fa-user"></span>
+                                <span class="mini-click-non">Manager Account</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                <li><a title="#" asp-area="" asp-controller="User" asp-action="Index"><span class="mini-sub-pro">View List Account</span></a></li>
+                                <li><a title="#" asp-area="" asp-controller="User" asp-action="Create"><span class="mini-sub-pro">Add Account</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="#" href="#">
+                                <span class="fas fa-chalkboard"></span>
+                                <span class="mini-click-non">Manager Class</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                <li><a title="#" asp-area="" asp-controller="Classes" asp-action="Index"><span class="mini-sub-pro">View List Class</span></a></li>
+                                <li><a title="#" asp-area="" asp-controller="Classes" asp-action="Create"><span class="mini-sub-pro">Add Class</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="#" href="#">
+                                <span class="fas fa-book"></span>
+                                <span class="mini-click-non">Manager Subject</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                <li><a title="#" asp-area="" asp-controller="Subjects" asp-action="Index"><span class="mini-sub-pro">View List Subject</span></a></li>
+                                <li><a title="#" asp-area="" asp-controller="Subjects" asp-action="Create"><span class="mini-sub-pro">Add Subject</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="#" href="#">
+                                <span class="fas fa-atom"></span>
+                                <span class="mini-click-non">Manager Major</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                <li><a title="#" asp-area="" asp-controller="Major" asp-action="Index"><span class="mini-sub-pro">View List Major</span></a></li>
+                                <li><a title="#" asp-area="" asp-controller="Major" asp-action="Create"><span class="mini-sub-pro">Add Major</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="#" href="#">
+                                <span class="fas fa-atom"></span>
+                                <span class="mini-click-non">Register Class</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                <li><a title="#" asp-area="" asp-controller="ClassRegister" asp-action="Index"><span class="mini-sub-pro">View List Class</span></a></li>
+                                <li><a title="#" asp-area="" asp-controller="ClassRegister" asp-action="Create"><span class="mini-sub-pro">Register Class</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="#" href="#">
+                                <span class="fas fa-atom"></span>
+                                <span class="mini-click-non">Register Major</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                <li><a title="#" asp-area="" asp-controller="MajorRegister" asp-action="Index"><span class="mini-sub-pro">View List Register</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="#" href="#">
+                                <span class="fas fa-scroll"></span>
+                                <span class="mini-click-non">Manager Application</span>
+                            </a>
+                            <ul class="submenu-angle" aria-expanded="true">
+                                <li><a title="#" asp-area="" asp-controller="Application" asp-action="Index"><span class="mini-sub-pro">View Application</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </div>
+    <!-- End Left menu area -->
+    <!-- Start Welcome area -->
+    <div class="header-advance-area">
+                <div class="header-top-area">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="header-top-wraper">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
+                                            <div class="menu-switcher-pro">
+                                                <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+													    <i class="fas fa-compass"></i>
+												    </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
+                                            <div class="header-top-menu tabl-d-n">
+                                                <ul class="nav navbar-nav mai-top-nav">
+                                                    <li class="nav-item"><a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                            <div class="header-right-info">
+                                                <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                                    <li class="nav-item">
+                                                        <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+															    <img src="img/product/pro4.jpg" alt="" />
+															    <span class="admin-name">Mr.Sometime Win Mid</span>
+															    <i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
+														    </a>
+                                                        <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                                            <li><a href="#"><span class="edu-icon edu-home-admin author-log-ic"></span>View Profile</a>
+                                                            </li>
+                                                            <li><a href="#"><span class="edu-icon edu-user-rounded author-log-ic"></span>Edit Profile</a>
+                                                            </li>
+                                                            <li><a href="#"><span class="edu-icon edu-money author-log-ic"></span>Log Out</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <!-- End Welcome area -->
+
+    <!-- jquery
+        ============================================ -->
+    <script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS
+        ============================================ -->
+    <script src="~/js/bootstrap.min.js"></script>
+    <!-- wow JS
+        ============================================ -->
+    <script src="~/js/wow.min.js"></script>
+<!-- meanmenu JS
+        ============================================ -->
+    <script src="~/js/jquery.meanmenu.js"></script>
+    <!-- owl.carousel JS
+        ============================================ -->
+    <script src="~/js/owl.carousel.min.js"></script>
+    <!-- sticky JS
+        ============================================ -->
+    <script src="~/js/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+        ============================================ -->
+    <script src="~/js/jquery.scrollUp.min.js"></script>
+    <!-- counterup JS
+        ============================================ -->
+    <script src="~/js/counterup/jquery.counterup.min.js"></script>
+    <script src="~/js/counterup/waypoints.min.js"></script>
+    <script src="~/js/counterup/counterup-active.js"></script>
+    <!-- mCustomScrollbar JS
+        ============================================ -->
+    <script src="~/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/js/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- metisMenu JS
+        ============================================ -->
+    <script src="~/js/metisMenu/metisMenu.min.js"></script>
+    <script src="~/js/metisMenu/metisMenu-active.js"></script>
+<!-- morrisjs JS
+        ============================================ -->
+    <script src="~/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="~/js/sparkline/jquery.charts-sparkline.js"></script>
+    <script src="~/js/sparkline/sparkline-active.js"></script>
+    <!-- calendar JS
+        ============================================ -->
+    <script src="~/js/fullcalendar/main.min.js"></script>
+    <script src="~/js/fullcalendar/main.js"></script>
+    <!-- plugins JS
+        ============================================ -->
+    <script src="~/js/plugins.js"></script>
+    <!-- main JS
+        ============================================ -->
+    <script src="~/js/main.js"></script>
+    <!-- Skdslider
+        ============================================ -->
+    <script src="~/js/skdslider.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery('#demo1').skdslider({
+                'delay': 5000,
+                'animationSpeed': 2000,
+                'showNextPrev': true,
+                'showPlayButton': true,
+                'autoSlide': true,
+                'animationType': 'fading'
+            });
+            jQuery('#responsive').change(function () {
+                $('#responsive_wrapper').width(jQuery(this).val());
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,listWeek'
+                },
+                contentHeight: 600
+            });
+            calendar.render();
+        });
+
+    </script>
+
+</body>
+
+</html>

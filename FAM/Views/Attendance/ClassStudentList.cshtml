@@ -1,0 +1,179 @@
+﻿@using BusinessObj.DTOs;
+@using BusinessObj.Models;
+@{
+    ViewData["Title"] = "TimetableList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<ViewClassTimeTableDTO>? loadData = ViewData["CLASSSTUDENTLIST"] as IEnumerable<ViewClassTimeTableDTO>;
+    IEnumerable<ErrorAttendance>? errorlist = TempData["ERRORATTENDANCE"] as IEnumerable<ErrorAttendance>;
+}
+
+<h2>Attendance List</h2>
+<h2 style="color:red">@ViewBag.Message</h2>
+
+@if(errorlist != null)
+{
+    <table class="table holycow">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Account Id</th>
+              <th scope="col">Error Message</th>
+            </tr>
+          </thead>
+          <tbody>
+              @{ int counter = 1;}
+              @foreach(ErrorAttendance err in errorlist)
+                {
+                    <tr>
+                        <th scope="row">@counter</th>
+                        <td>@err.AccountId</td>
+                        <td>@err.ErrorMessage</td>
+                    </tr>
+                    counter++;
+                }
+          </tbody>
+        </table>
+}
+
+@if(ViewBag.ALLOW == null)
+{
+    @if(loadData != null)
+    {
+        <table class="table holycow">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Mã số sinh diên</th>
+              <th scope="col">Tên sinh diên</th>
+            </tr>
+          </thead>
+          <tbody>
+              @{ int counter = 1;}
+              @foreach(ViewClassTimeTableDTO dto in loadData)
+                {
+                    <tr>
+                        <th scope="row">@counter</th>
+                        <td>@dto.AccountId</td>
+                        <td>@dto.AccountOwner</td>
+                    </tr>
+                    counter++;
+                }
+          </tbody>
+        </table>
+    }
+}
+@if(ViewBag.ALLOW == "Turning red")
+{
+    @if(loadData != null)
+    {
+        <form asp-action="TakeAttendance" asp-controller="Attendance" method="POST">
+            <table class="table holycow">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Mã số sinh diên</th>
+                  <th scope="col">Tên sinh diên</th>
+                  <th scope="col">Take Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                  @{ int counter = 1;}
+                  @foreach(ViewClassTimeTableDTO dto in loadData)
+                    {
+                        <tr>
+                            <th scope="row">@counter</th>
+                            <td>
+                                <input type="hidden" name="studentid" value="@dto.AccountId"/>
+                                @dto.AccountId
+                            </td>
+                            <td>@dto.AccountOwner</td>
+                            <td>
+                                <select name="attendance">
+                                @if(!@dto.IsPresent)
+                                {
+                                    <option value="AFK" selected>Absent</option>
+                                    <option value="LessGo">Present</option>
+                                }
+                                @if(@dto.IsPresent)
+                                {
+                                    <option value="AFK">Absent</option>
+                                    <option value="LessGo"selected>Present</option>
+                                } 
+                                </select>
+                            </td>
+                        </tr>
+                        counter++;
+                    }
+                    
+              </tbody>
+            </table>
+            <button>Hit me Hit me hit me hit me hit me, you cannot</button>
+        </form>
+    }
+}
+
+
+@if(ViewBag.ALLOW == "So Sad")
+{
+    @if(loadData != null)
+    {
+        <form asp-action="TakeAttendance" asp-controller="Attendance" method="POST">
+            <table class="table holycow">
+                <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Mã số sinh diên</th>
+                  <th scope="col">Tên sinh diên</th>
+                  <th scope="col">Take Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                  @{ int counter = 1;}
+                  @foreach(ViewClassTimeTableDTO dto in loadData)
+                    {
+                        <tr>
+                            <th scope="row">@counter</th>
+                            <td>
+                                <input type="hidden" name="studentid" value="@dto.AccountId"/>
+                                @dto.AccountId
+                            </td>
+                            <td>@dto.AccountOwner</td>
+                            <td>
+                                <select name="attendance" disabled>
+                                @if(!@dto.IsPresent)
+                                {
+                                    <option value="AFK" selected>Absent</option>
+                                    <option value="LessGo">Present</option>
+                                }
+                                @if(@dto.IsPresent)
+                                {
+                                    <option value="AFK">Absent</option>
+                                    <option value="LessGo"selected>Present</option>
+                                } 
+                                </select>
+                            </td>
+                        </tr>
+                        counter++;
+                    }
+                    
+              </tbody>
+            </table>
+            <a asp-action="" asp-controller="">Back To Attendance Report</a>
+        </form>
+    }
+}
+
+
+
+<style>
+    h2
+    {
+        margin-left: 200px;
+        margin-top: 65px;
+    }
+    .holycow
+    {
+        margin-left: 130px;
+        margin-top: 50px;
+    }
+</style>

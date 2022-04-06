@@ -1,0 +1,57 @@
+﻿@model BusinessObj.Models.Application
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Major</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ApplicationID" />
+            <input type="hidden" asp-for="AccountId" />
+            <input type="hidden" asp-for="CreateDay" />
+            <div class="form-group">
+                <label asp-for="ApplicationTypeID" class="control-label"></label>
+                <select asp-for="ApplicationTypeID" class ="form-control" asp-items="ViewBag.ApplicationTypeID">
+                    <option value="AT1">Đề nghị miễn điểm danh</option>
+                    <option value="AT2">Đề nghị cấp bảng điểm quá trình</option>
+                    <option value="AT3">Đề nghị chuyển đổi tín chỉ</option>
+                    <option value="AT4">Đề nghị phúc tra</option>
+                    <option value="AT5">Đăng kí thi cải thiện điểm</option>
+                    <option value="AT6">Đề nghị chuyển ngành</option>
+                    <option value="AT7">Đề nghị chuyển cơ sở</option>
+                    <option value="AT8">Đề nghị rút tiền</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationContent" class="control-label"></label>
+                <input asp-for="ApplicationContent" class="form-control" />
+                <span asp-validation-for="ApplicationContent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApplicationStatus" class="control-label"></label>
+                <select asp-for="ApplicationStatus" class ="form-control" asp-items="ViewBag.ApplicationStatus">
+                    <option value="Approved">Approve</option>
+                    <option value="Rejected">Reject</option>
+                    <option value="Delete">Delete</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

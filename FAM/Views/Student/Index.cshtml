@@ -1,0 +1,103 @@
+﻿@using BusinessObj.Models;
+@using System.Text.Json;
+
+@{
+    ViewData["Title"] = "Student's Home Page";
+    User authenticatedUser = null;
+    string loginInfo = Context.Session.GetString("LOGININFO");
+    if (loginInfo != null)
+    {
+        authenticatedUser = JsonSerializer.Deserialize<User>(loginInfo);
+    }
+}
+
+<div class="row">
+    <div class="logo-pro">
+        <ul id="demo1">
+            <li>
+                <img src="~/img/logo/banner-fptu.png" alt="" />
+                <!--Slider Description example-->
+                <div class="slide-desc">
+                </div>
+            </li>
+            <li>
+                <img src="~/img/logo/banner-fptu-2.png" alt="" />
+                <div class="slide-desc">
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="white-box">
+        <div class="col-lg-8">
+            <div id='calendar'>
+                <div id="muteYouTubeVideoPlayer"></div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <h2>Academic Information</h2>
+            <div class="row">
+                <h3>Tra cứu thông tin</h3>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <a asp-area="" asp-controller="Attendance" asp-action="Index">Báo cáo điểm danh</a>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <a asp-area="" asp-controller="Timetable" asp-action="ViewTimetable">Xem thời khoá biểu</a>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <a asp-area="" asp-controller="Timetable" asp-action="ViewTimetable">Xem lịch thi</a>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <a asp-area="" asp-controller="Subjects" asp-action="Index">Xem danh sách môn học</a>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <a asp-area="" asp-controller="ClassRegister" asp-action="Index">Xem danh sách môn đã đăng kí</a>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <a asp-area="" asp-controller="ClassRegister" asp-action="Create">đăng kí môn học</a>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Xem bảng điểm (not yet)</a>
+                </div>
+                <h3>Registration/Application</h3>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <a asp-area="" asp-controller="Application" asp-action="Index">Danh sách đơn</a>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <a asp-area="" asp-controller="Application" asp-action="Create">Đăng kí đơn</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script async src="https://www.youtube.com/iframe_api"></script>
+    <script>
+        function onYouTubeIframeAPIReady() {
+            var player;
+            player = new YT.Player('muteYouTubeVideoPlayer', {
+                videoId: '5BQ00cZzIk0', // YouTube Video ID
+                width: 1000, // Player width (in px)
+                height: 563, // Player height (in px)
+                playerVars: {
+                    autoplay: 1,        // Auto-play the video on load
+                    controls: 1,        // Show pause/play buttons in player
+                    showinfo: 0,        // Hide the video title
+                    modestbranding: 1,  // Hide the Youtube Logo
+                    disablekb: 1,       //disable kayboard shortcut
+                    loop: 1,            // Run the video in a loop
+                    fs: 1,              // Hide the full screen button
+                    rel: 0,             // related vid at pause
+                    cc_load_policy: 1,  // Hide closed captions
+                    iv_load_policy: 3,  // Hide the Video Annotations
+                    autohide: 1,        // Hide video controls when playing
+                },
+                events: {
+                    onReady: function (e) {
+                        e.target.mute();
+                    },
+                },
+            });
+        }
+    </script>
+}

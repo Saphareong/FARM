@@ -1,0 +1,119 @@
+﻿@model BusinessObj.Models.User
+
+@{
+    ViewData["Title"] = "Admin | Account ViewOne";
+}
+
+
+<hr />
+<div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list single-page-breadcome">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="breadcome-heading">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <ul class="breadcome-menu">
+                                <li>
+                                    <a asp-controller="Home" asp-action="Index">Home</a> <span class="bread-slash">/</span>
+                                </li>
+                                <li>
+                                    <span class="bread-blod">View One</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-pro-review-area mt-t-30 mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="profile-img">
+                        <img src="~/img/profile/1.jpg" alt="" />
+                    </div>
+
+                </div>
+
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <style>
+                        h1 {
+                            text-align: center;
+                        }
+                    </style>
+
+                    <h1>
+                        Account Information
+                    </h1>
+
+                    <div class="profile-info-inner">
+                        <div class="profile-details-hr">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                    <div class="address-hr">
+                                        <p><b>Name</b><br />@Html.DisplayFor(model => model.Ower)</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                        <p><b>Account Name</b><br />@Html.DisplayFor(model => model.AccountName)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                    <div class="address-hr">
+                                        <p><b>Email</b><br />@Html.DisplayFor(model => model.Email)</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                        <p><b>Phone Number</b><br />@Html.DisplayFor(model => model.Phone)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                    <div class="address-hr">
+                                        <p><b>Status</b><br />@Html.DisplayFor(model => model.Status)</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
+                                    <div class="address-hr tb-sm-res-d-n dps-tb-ntn">
+                                        <p><b>Role Code</b>><br />@Html.DisplayFor(model => model.RoleId)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="address-hr">
+                                        <a asp-action="Index" asp-controller = "User" class="btn btn-custon-rounded-three btn-warning">Back</a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="address-hr">
+                                        <a asp-action="Edit" asp-controller = "User" class="btn btn-custon-rounded-three btn-primary" asp-route-id="@Model?.AccountId">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

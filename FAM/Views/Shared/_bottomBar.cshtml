@@ -1,0 +1,17 @@
+﻿@model PagerModel
+
+<span class="pagination-info">Showing @Model.StartRecord to @Model.EndRecord of @Model.TotalItems Rows</span>
+
+<span class="page-list">
+    <select class="form-control-pagination" id="pageSelector" asp-items="Model.GetPageSizes()" onchange="ChangePageSize(this);"></select>
+    rows per page
+</span>
+
+<span class="pagination-info">Showing @Model.CurrentPage / @Model.TotalPages Pages</span>
+
+<script>
+    function ChangePageSize(obj){
+        var controllerName = '@this.ViewContext.RouteData.Values["controller"].ToString()';
+        window.location.href="/" + controllerName + "/@Model.Action" + "?pageSize=" + obj.value + "&SearchText@Model.SearchText"
+    }
+</script>

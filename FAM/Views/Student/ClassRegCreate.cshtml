@@ -1,0 +1,88 @@
+﻿@model BusinessObj.Models.UserClass
+@using BusinessObj.Models
+@{
+    ViewData["Title"] = "Register Subject";
+    List<UserClass>? loadData = ViewData["classinfo"] as List<UserClass>;
+    
+}
+<!--
+    Tự lấy thông tin ra nhaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!
+    bên kia có lấy rồi bên FE chỉ cần lấy Rổ hứng nó thôi, mò vô code dòng thứ 62 -> 64
+--> 
+
+<div class="basic-form-area mg-b-15" style="margin-top: 25px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                @if (TempData["SHOW"] != null)
+                {
+                    <div class="alert alert-warning alert-st-three">
+                        <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
+                            <span class="icon-sc-cl" aria-hidden="true">×</span>
+                        </button>
+                        <i class="fa fa-exclamation-triangle edu-warning-danger admin-check-pro admin-check-pro-none" aria-hidden="true"></i>
+                        <p class="message-mg-rt message-alert-none"><strong>Warning!</strong> @TempData["SHOW"]</p>
+                    </div>
+                }
+                @if (ViewData["classinfo"] != null)
+                {
+                    <div class="alert alert-success alert-success-style1 alert-success-stylenone">
+                        <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">
+                            <span class="icon-sc-cl" aria-hidden="true">×</span>
+                        </button>
+                        <i class="fa fa-check edu-checked-pro admin-check-sucess admin-check-pro-none" aria-hidden="true"></i>
+                        <p class="message-alert-none"><strong>Success!</strong> @loadData.</p>
+                    </div>
+                }
+
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline12-list">
+                    <div class="sparkline12-hd">
+                        <div class="main-sparkline12-hd">
+                            <h1>Đăng kí môn</h1>
+                        </div>
+                    </div>
+                    <div class="sparkline12-graph">
+                        <div class="basic-login-form-ad">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="all-form-element-inner">
+                                        <form asp-action="Create">
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                        <label class="login2 pull-right pull-right-pro">Chọn môn:</label>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                        <select name="SubjectID" class="form-control" asp-items="ViewBag.Subject"></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3"></div>
+                                                    <div class="col-lg-9">
+                                                        <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                            <input type="button" value="Cancel" onclick="location.href = '@Url.Action("Index","Home")';" class="btn btn-white"/>
+                                                            <input type="submit" value="Search" class="btn btn-sm btn-primary login-submit-cs"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

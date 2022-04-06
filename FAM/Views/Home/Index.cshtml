@@ -1,0 +1,25 @@
+﻿@using BusinessObj.Models;
+@using System.Text.Json
+@{
+    ViewData["Title"] = "Home Page";
+    User authenticatedUser = null;
+    string loginInfo = Context.Session.GetString("LOGININFO");
+    if(loginInfo != null)
+    {
+        authenticatedUser = JsonSerializer.Deserialize<User>(loginInfo);
+    }
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @if(authenticatedUser == null)
+    {
+        <a asp-action="Login" asp-controller="Home">Login Đi em.</a>
+    }
+    @if(authenticatedUser != null)
+    {
+        <p>Hello @authenticatedUser.Ower !!</p>
+        <a asp-action="Logout" asp-controller="Home">Logout đi em.</a>
+    }
+</div>

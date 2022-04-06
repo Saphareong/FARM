@@ -1,0 +1,78 @@
+﻿@using BusinessObj.DTOs;
+@using BusinessObj.Models;
+@model FAM.Models.EditTimeTableModel;
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewDetailTimetableDTO? loadData = ViewData["CLASSINFO"] as ViewDetailTimetableDTO;
+}
+
+
+<h2>View Timetable Detail</h2>
+<h2 style="color:red">@TempData["Message"]</h2>
+<h2 style="color:red">@ViewBag.Message</h2>
+
+<div class="row holycow">
+        <div class="col-md-6">
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    Date Happening
+                </dt>
+                <dd>
+                    @loadData.ThatSlotDate
+                </dd>
+                <dt>
+                    Slot
+                </dt>
+                <dd>
+                    @loadData.slotInThatDate
+                </dd>
+                <dt>
+                    Course session number
+                </dt>
+                <dd>
+                    @loadData.courseSessionNumber
+                </dd>
+                <dt>
+                    Class Name
+                </dt>
+                <dd>
+                    <a asp-action="ViewStudentsClass" asp-controller="Attendance" 
+                    asp-route-classid="@loadData.ClassID" asp-route-roomdetailid="@loadData.RoomDetailId">
+                        @loadData.ClassName</a>
+                </dd>
+                <dt>
+                    Teacher Name
+                </dt>
+                <dd>
+                    @loadData.TeacherName
+                </dd>
+                <dt>
+                    Subject Name
+                </dt>
+                <dd>
+                    @loadData.SubjectName
+                </dd>
+                <dt>
+                    Attendance Status
+                </dt>
+                <dd>
+                    @loadData.AttendanceStatus
+                </dd>
+            </dl>
+    </div>
+</div>
+
+<style>
+    h2
+    {
+        margin-left: 200px;
+        margin-top: 65px;
+    }
+    .holycow
+    {
+        margin-left: 130px;
+        margin-top: 50px;
+    }
+</style>

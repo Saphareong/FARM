@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "FAM": "Server=LAPTOP-8LC85HGU\\SQLEXPRESS;uid=sa;pwd=12;database=FAM"
+  }
+}

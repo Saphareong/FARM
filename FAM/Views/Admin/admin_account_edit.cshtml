@@ -1,0 +1,123 @@
+﻿@model BusinessObj.Models.User
+
+@{
+    ViewData["Title"] = "Admin | Edit Account";
+}
+
+
+<hr />
+<div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="breadcome-list single-page-breadcome">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="breadcome-heading">
+                                
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <ul class="breadcome-menu">
+                                <li>
+                                    <a asp-controller="Home" asp-action="Index">Home</a> <span class="bread-slash">/</span>
+                                </li>
+                                <li>
+                                    <span class="bread-blod">Edit Account</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-pro-review-area mt-t-30 mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="product-payment-inner-st">
+                        <ul id="myTabedu1" class="tab-review-design">
+                            <li class="active"><a>Account Information</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content custom-product-edit">
+                            <div class="product-tab-list tab-pane fade active in" id="description">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="review-content-section">
+                                            <div id="dropzone1" class="pro-ad">
+                                                <form asp-action="Edit" asp-controller="User">
+                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="hidden" asp-for="AccountId" />
+                                                        <div class="form-group">
+                                                            <label asp-for="AccountName" class="control-label"></label>
+                                                            <input asp-for="AccountName" class="form-control" />
+                                                            <span asp-validation-for="AccountName" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label asp-for="Password" class="control-label"></label>
+                                                            <input id="pwd" type="password" asp-for="Password" class="form-control" />
+                                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label asp-for="Ower" class="control-label"></label>
+                                                            <input asp-for="Ower" class="form-control" />
+                                                            <span asp-validation-for="Ower" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="button" value="Cancel" onclick="location.href = '@Url.Action("Index","User")';" class="btn btn-custon-rounded-three btn-danger"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="RoleId" class="control-label"></label>
+                                                            <select asp-for="RoleId" class="form-control" asp-items="ViewBag.RoleId">
+                                                                <option value="AD">Admin</option>
+                                                                <option value="ST">Student</option>
+                                                                <option value="TE">Teacher</option>
+                                                                <option value="PA">Parent</option>
+                                                            </select>
+                                                            <span asp-validation-for="RoleId" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label asp-for="Email" class="control-label"></label>
+                                                            <input asp-for="Email" class="form-control" />
+                                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label asp-for="Phone" class="control-label"></label>
+                                                            <input asp-for="Phone" class="form-control" />
+                                                            <span asp-validation-for="Phone" class="text-danger"></span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label asp-for="Status" class="control-label"></label>
+                                                            <select asp-for="Status" class="form-control">
+                                                                <option value="ON">ON</option>
+                                                                <option value="OFF">OFF</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="submit" value="Edit Account" class="btn btn-custon-rounded-three btn-primary" />
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

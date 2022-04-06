@@ -1,0 +1,100 @@
+﻿@using BusinessObj.DTOs;
+@using BusinessObj.Models;
+@{
+    //ViewData["Title"] = "TimetableList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    IEnumerable<ViewSubjectAttendanceDTO>? ClassList = ViewData["CLASS"] as IEnumerable<ViewSubjectAttendanceDTO>;
+    IEnumerable<ViewAttendanceDTO>? AttendanceList = ViewData["ATTENDANCE"] as IEnumerable<ViewAttendanceDTO>;
+}
+
+
+<h2>Your Attendance Report</h2>
+<h2>@ViewBag.Message</h2>
+<h2>@TempData["Message"]</h2>
+
+@if(ClassList != null)
+{
+    <div class="row holycow">
+    <div class="col">
+        <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Subject Name</th>
+            <th scope="col">Class Name</th>
+            <th scope="col">Date Start</th>
+        </tr>
+        </thead>
+        <tbody>
+            @{ int counter = 1;}
+            @foreach(ViewSubjectAttendanceDTO dto in ClassList)
+            {
+                <tr>
+                    <th scope="row">@counter</th>
+                    <td>
+                        @if(@dto.DateStart == "Vẫn chưa khai giảng")
+                        {
+                            @dto.SubjectName
+                        }
+                        else
+                        {
+                            <a asp-action="ViewAttendanceReportDetail" asp-controller="Attendance" asp-route-classid="@dto.classid">
+                                @dto.SubjectName
+                            </a>
+                        }
+                    </td>
+                    <td>@dto.ClassName</td>
+                    <td>@dto.DateStart</td>
+                </tr>
+                counter++;
+            }
+        </tbody>
+        </table>
+    </div>
+    <div class="col">
+        @if(AttendanceList != null)
+        {
+            <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Slot</th>
+                <th scope="col">Room</th>
+                <th scope="col">Teacher</th>
+                <th scope="col">Class</th>
+                <th scope="col">Attendance</th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach(ViewAttendanceDTO dto in AttendanceList)
+                {
+                    <tr>
+                        <th scope="row">@dto.CourseNumba</th>
+                        <td>@dto.DateStart</td>
+                        <td>@dto.slot</td>
+                        <td>@dto.roomid</td>
+                        <td>@dto.TeacherName</td>
+                        <td>@dto.ClassName</td>
+                        <td>@dto.AttendanceStatus</td>
+                    </tr>
+                }
+            </tbody>
+            </table>
+        }
+    </div>
+</div>
+}
+
+<style>
+    h2
+    {
+        margin-left: 200px;
+        margin-top: 65px;
+    }
+    .holycow
+    {
+        margin-left: 200px;
+        margin-top: 50px;
+    }
+</style>

@@ -1,0 +1,109 @@
+﻿@model BusinessObj.Models.Application
+
+@{
+    ViewData["Title"] = "Create New Application";
+}
+
+<div class="basic-form-area mg-b-15" style="margin-top: 25px">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="sparkline12-list">
+                    <div class="sparkline12-hd">
+                        <div class="main-sparkline12-hd">
+                            <h1>Đăng kí đơn</h1>
+                        </div>
+                    </div>
+                    <div class="sparkline12-graph">
+                        <div class="basic-login-form-ad">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="all-form-element-inner">
+                                        <form asp-action="Create" id="application_form">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <input type="hidden" asp-for="ApplicationID" />
+
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                        <label class="login2 pull-right pull-right-pro">Loại đơn:</label>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                        <div class="form-select-list">
+                                                            <select asp-for="ApplicationTypeID" class="form-control custom-select-value" id="ApplicationTypeID" asp-items="ViewBag.ApplicationTypeID">
+                                                                <option value="AT1">Đề nghị miễn điểm danh</option>
+                                                                <option value="AT2">Đề nghị cấp bảng điểm quá trình</option>
+                                                                <option value="AT3">Đề nghị chuyển đổi tín chỉ</option>
+                                                                <option value="AT4">Đề nghị phúc tra</option>
+                                                                <option value="AT5">Đăng kí thi cải thiện điểm</option>
+                                                                <option value="AT6">Đề nghị chuyển ngành</option>
+                                                                <option value="AT7">Đề nghị chuyển cơ sở</option>
+                                                                <option value="AT8">Đề nghị rút tiền</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                        <label class="login2 pull-right pull-right-pro">Lý do:</label>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                        <textarea asp-for="ApplicationContent" class="form-control"rows="8" id="content"></textarea>
+                                                        <span asp-validation-for="ApplicationContent" class="text-danger"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                                        <label class="login2 pull-right pull-right-pro">File Upload:</label>
+                                                    </div>
+                                                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                                        <div class="file-upload-inner ts-forms">
+                                                            <div class="input prepend-small-btn">
+                                                                <div class="file-button">
+                                                                    Browse
+                                                                    <input type="file" onchange="document.getElementById('prepend-small-btn').value = this.value;">
+                                                                </div>
+                                                                <input type="text" id="prepend-small-btn" placeholder="no file selected">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group-inner">
+                                                <div class="row">
+                                                    <div class="col-lg-3"></div>
+                                                    <div class="col-lg-9">
+                                                        <div class="login-horizental cancel-wp pull-left form-bc-ele">
+                                                            <input type="button" value="Cancel" onclick="location.href = '@Url.Action("Index","Application")';" class="btn btn-white"/>
+                                                            <input type="submit" value="Create" class="btn btn-sm btn-primary login-submit-cs"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        CKEDITOR.replace( 'content' );
+    </script>
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
